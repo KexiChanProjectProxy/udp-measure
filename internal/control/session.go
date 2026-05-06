@@ -215,24 +215,33 @@ func (s *Session) handlePrepare(conn net.Conn, msg protocol.Prepare) error {
 	s.intervalMs = msg.IntervalMs
 	s.clientReceivePort = msg.ClientReceivePort
 
-	// Get client IP from TCP connection for downlink target
+	// Get client IP from TCP connection and determine its family
 	clientIP := ""
+	tcpFamilyIsIPv6 := false
 	if tcpAddr, ok := conn.RemoteAddr().(*net.TCPAddr); ok {
 		clientIP = tcpAddr.IP.String()
+		tcpFamilyIsIPv6 = tcpAddr.IP.To4() == nil && tcpAddr.IP.To16() != nil
 	}
 
+	// Determine target address for server->client UDP
+	// Must use address family matching TCP connection for UDP to work correctly
+	targetPort := msg.UDPPort
 	if msg.Direction == protocol.DirectionDownlink && msg.ClientReceivePort != 0 {
-		if msg.Family == protocol.FamilyIPv6 {
-			s.targetAddress = fmt.Sprintf("[%s]:%d", clientIP, msg.ClientReceivePort)
-		} else {
-			s.targetAddress = fmt.Sprintf("%s:%d", clientIP, msg.ClientReceivePort)
-		}
+		targetPort = msg.ClientReceivePort
+	}
+
+	// Validate family compatibility: IPv6 tests need IPv6 TCP, IPv4 tests need IPv4 TCP
+	// Using an IPv4 address as IPv6 (e.g., [192.168.x.x]) is invalid and will fail
+	if msg.Family == protocol.FamilyIPv6 && !tcpFamilyIsIPv6 {
+		s.sendInvalidRequest(conn, "IPv6 test requires IPv6 TCP connection; cannot use IPv4 address for IPv6 target", nil)
+		return nil
+	}
+
+	// Build target address with correct formatting for the family
+	if msg.Family == protocol.FamilyIPv6 {
+		s.targetAddress = fmt.Sprintf("[%s]:%d", clientIP, targetPort)
 	} else {
-		if msg.Family == protocol.FamilyIPv6 {
-			s.targetAddress = fmt.Sprintf("[%s]:%d", clientIP, msg.UDPPort)
-		} else {
-			s.targetAddress = fmt.Sprintf("%s:%d", clientIP, msg.UDPPort)
-		}
+		s.targetAddress = fmt.Sprintf("%s:%d", clientIP, targetPort)
 	}
 
 	if err := s.setState(protocol.StateReady); err != nil {

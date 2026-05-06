@@ -197,13 +197,6 @@ func clientMain(args []string) {
 		os.Exit(1)
 	}
 
-	// Use IPv6 if IPv4 is empty, otherwise use IPv4
-	controlTarget := cfg.Target4
-	if controlTarget == "" {
-		controlTarget = cfg.Target6
-	}
-	serverAddr := net.JoinHostPort(controlTarget, fmt.Sprintf("%d", cfg.ControlPort))
-
 	// Estimate duration for report
 	estimatedDuration := cfg.EstimateDuration(plans).String()
 
@@ -215,6 +208,21 @@ func clientMain(args []string) {
 	for i, plan := range plans {
 		fmt.Printf("Running test %d/%d: family=%s port=%d direction=%s size=%d\n",
 			i+1, len(plans), plan.Family, plan.Port, plan.Direction, plan.PayloadSize)
+
+		// Select control target based on plan family
+		controlTarget := cfg.Target4
+		if plan.Family == protocol.FamilyIPv6 {
+			controlTarget = cfg.Target6
+		}
+		// Fallback if preferred target is empty
+		if controlTarget == "" {
+			if cfg.Target4 != "" {
+				controlTarget = cfg.Target4
+			} else {
+				controlTarget = cfg.Target6
+			}
+		}
+		serverAddr := net.JoinHostPort(controlTarget, fmt.Sprintf("%d", cfg.ControlPort))
 
 		params := &control.TestParams{
 			Direction:   plan.Direction,
