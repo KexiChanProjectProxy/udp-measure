@@ -1,0 +1,66 @@
+=== RUN   TestParsePorts
+=== RUN   TestParsePorts/single_port
+=== RUN   TestParsePorts/comma_separated_ports
+=== RUN   TestParsePorts/range_ports
+=== RUN   TestParsePorts/mixed_range_and_single
+=== RUN   TestParsePorts/mixed_with_spaces
+=== RUN   TestParsePorts/duplicate_ports_deduplicated
+=== RUN   TestParsePorts/range_with_duplicate_single_port
+=== RUN   TestParsePorts/out_of_range_port
+=== RUN   TestParsePorts/port_zero
+=== RUN   TestParsePorts/negative_port
+=== RUN   TestParsePorts/invalid_port_string
+=== RUN   TestParsePorts/empty_string
+=== RUN   TestParsePorts/range_start_greater_than_end
+=== RUN   TestParsePorts/empty_in_comma_list
+=== RUN   TestParsePorts/port_too_high
+--- PASS: TestParsePorts (0.00s)
+    --- PASS: TestParsePorts/single_port (0.00s)
+    --- PASS: TestParsePorts/comma_separated_ports (0.00s)
+    --- PASS: TestParsePorts/range_ports (0.00s)
+    --- PASS: TestParsePorts/mixed_range_and_single (0.00s)
+    --- PASS: TestParsePorts/mixed_with_spaces (0.00s)
+    --- PASS: TestParsePorts/duplicate_ports_deduplicated (0.00s)
+    --- PASS: TestParsePorts/range_with_duplicate_single_port (0.00s)
+    --- PASS: TestParsePorts/out_of_range_port (0.00s)
+    --- PASS: TestParsePorts/port_zero (0.00s)
+    --- PASS: TestParsePorts/negative_port (0.00s)
+    --- PASS: TestParsePorts/invalid_port_string (0.00s)
+    --- PASS: TestParsePorts/empty_string (0.00s)
+    --- PASS: TestParsePorts/range_start_greater_than_end (0.00s)
+    --- PASS: TestParsePorts/empty_in_comma_list (0.00s)
+    --- PASS: TestParsePorts/port_too_high (0.00s)
+=== RUN   TestBuildSweepPlan
+=== RUN   TestBuildSweepPlan/ipv4_only_uplink_single_port
+=== RUN   TestBuildSweepPlan/ipv4_only_both_directions_single_port
+=== RUN   TestBuildSweepPlan/ipv4_and_ipv6_both_directions_two_ports
+=== RUN   TestBuildSweepPlan/size_sweep_three_sizes
+=== RUN   TestBuildSweepPlan/min_greater_than_max
+=== RUN   TestBuildSweepPlan/step_zero
+=== RUN   TestBuildSweepPlan/no_targets
+=== RUN   TestBuildSweepPlan/no_ports
+--- PASS: TestBuildSweepPlan (0.00s)
+    --- PASS: TestBuildSweepPlan/ipv4_only_uplink_single_port (0.00s)
+    --- PASS: TestBuildSweepPlan/ipv4_only_both_directions_single_port (0.00s)
+    --- PASS: TestBuildSweepPlan/ipv4_and_ipv6_both_directions_two_ports (0.00s)
+    --- PASS: TestBuildSweepPlan/size_sweep_three_sizes (0.00s)
+    --- PASS: TestBuildSweepPlan/min_greater_than_max (0.00s)
+    --- PASS: TestBuildSweepPlan/step_zero (0.00s)
+    --- PASS: TestBuildSweepPlan/no_targets (0.00s)
+    --- PASS: TestBuildSweepPlan/no_ports (0.00s)
+=== RUN   TestRejectOverlongSweep
+=== RUN   TestRejectOverlongSweep/short_sweep_passes
+=== RUN   TestRejectOverlongSweep/overlong_sweep_rejected
+=== RUN   TestRejectOverlongSweep/overlong_sweep_with_very_short_max_duration
+=== RUN   TestRejectOverlongSweep/large_sweep_with_generous_limit_passes
+--- PASS: TestRejectOverlongSweep (0.00s)
+    --- PASS: TestRejectOverlongSweep/short_sweep_passes (0.00s)
+    --- PASS: TestRejectOverlongSweep/overlong_sweep_rejected (0.00s)
+    --- PASS: TestRejectOverlongSweep/overlong_sweep_with_very_short_max_duration (0.00s)
+    --- PASS: TestRejectOverlongSweep/large_sweep_with_generous_limit_passes (0.00s)
+=== RUN   TestSweepPlanDeterministicOrder
+--- PASS: TestSweepPlanDeterministicOrder (0.00s)
+=== RUN   TestSweepPlanPortsAlwaysSorted
+--- PASS: TestSweepPlanPortsAlwaysSorted (0.00s)
+PASS
+ok  	github.com/udp-diagnostic/udpdiag/internal/config	(cached)

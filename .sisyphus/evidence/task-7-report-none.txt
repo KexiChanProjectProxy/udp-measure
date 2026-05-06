@@ -1,0 +1,4 @@
+=== RUN   TestCriticalSizeNoneWhenAllBelowThreshold
+--- PASS: TestCriticalSizeNoneWhenAllBelowThreshold (0.00s)
+PASS
+ok  	github.com/udp-diagnostic/udpdiag/internal/report	0.007s

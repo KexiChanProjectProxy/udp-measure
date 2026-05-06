@@ -1,0 +1,4 @@
+=== RUN   TestServerBusyResponse
+--- PASS: TestServerBusyResponse (0.01s)
+PASS
+ok  	github.com/udp-diagnostic/udpdiag/internal/control	0.018s

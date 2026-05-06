@@ -1,0 +1,32 @@
+=== Task 2 Protocol Tests Evidence ===
+
+Command: go test ./... -run 'Test(Protocol|ProbeHeader)' -v
+
+Results:
+- TestProtocolMessageRoundTrip: PASS
+  - hello: PASS
+  - prepare: PASS
+  - ready: PASS
+  - start: PASS
+  - send_complete: PASS
+  - fetch_result: PASS
+  - result: PASS
+  - cancel: PASS
+  - busy: PASS
+  - invalid_request: PASS
+  - internal_error: PASS
+- TestProbeHeaderRoundTrip: PASS
+- TestProbeHeaderValidate: PASS
+- TestProbeHeaderSetFromParams: PASS
+- TestProbeHeaderUnmarshalTruncated: PASS
+- TestProtocolStateMachineRejectsInvalidTransition: PASS
+  - idle_to_running: PASS
+  - idle_to_collecting: PASS
+  - ready_to_completed: PASS
+  - running_to_idle: PASS
+  - collecting_to_ready: PASS
+
+All protocol encode/decode roundtrip tests pass.
+All control message families are serialized/deserialized correctly.
+All enum validations pass.
+All state machine transition tests pass.

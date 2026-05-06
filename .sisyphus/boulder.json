@@ -1,0 +1,89 @@
+{
+  "active_plan": "/home/kexi/udp-packet-audit-debug/.sisyphus/plans/udp-bidirectional-loss-pmtu-tool.md",
+  "started_at": "2026-05-06T00:35:30.769Z",
+  "session_ids": [
+    "ses_20549e902ffe0BBjRwheExOiFt",
+    "ses_205493c0cffeTvxqzvqZQENQBR",
+    "ses_205493a59ffeYcuTLGWe9GHpoB",
+    "ses_2048c33fdffelcRv1SmXjEq1Oy",
+    "ses_2048c2f41ffeeFErNTrMggH3nB",
+    "ses_2048c2f36ffeZlhVnxHDXLRHl9",
+    "ses_2048c2f26ffe8b1Xs4xFgaPUdI"
+  ],
+  "session_origins": {
+    "ses_20549e902ffe0BBjRwheExOiFt": "direct",
+    "ses_205493c0cffeTvxqzvqZQENQBR": "appended",
+    "ses_205493a59ffeYcuTLGWe9GHpoB": "appended",
+    "ses_2048c33fdffelcRv1SmXjEq1Oy": "appended",
+    "ses_2048c2f41ffeeFErNTrMggH3nB": "appended",
+    "ses_2048c2f36ffeZlhVnxHDXLRHl9": "appended",
+    "ses_2048c2f26ffe8b1Xs4xFgaPUdI": "appended"
+  },
+  "plan_name": "udp-bidirectional-loss-pmtu-tool",
+  "agent": "atlas",
+  "task_sessions": {
+    "todo:1": {
+      "task_key": "todo:1",
+      "task_label": "1",
+      "task_title": "建立 Go 项目骨架与 CLI 契约",
+      "session_id": "ses_205493a59ffeYcuTLGWe9GHpoB",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-05-06T00:42:19.574Z"
+    },
+    "todo:2": {
+      "task_key": "todo:2",
+      "task_label": "2",
+      "task_title": "定义控制协议、错误码与会话状态机",
+      "session_id": "ses_205421385fferFe5P0Nh1RV8F6",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-05-06T00:51:13.943Z"
+    },
+    "todo:3": {
+      "task_key": "todo:3",
+      "task_label": "3",
+      "task_title": "实现 client 参数解析、sweep 规划与运行时边界保护",
+      "session_id": "ses_20539aeabffer0e9bt3XMxk6iz",
+      "agent": "Sisyphus-Junior",
+      "category": "unspecified-high",
+      "updated_at": "2026-05-06T01:45:45.596Z"
+    },
+    "todo:6": {
+      "task_key": "todo:6",
+      "task_label": "6",
+      "task_title": "实现 uplink/downlink 编排与 TCP/UDP 协同执行",
+      "session_id": "ses_20507f90fffeAw5Uyw01whLxWA",
+      "agent": "Sisyphus-Junior",
+      "category": "deep",
+      "updated_at": "2026-05-06T03:04:57.983Z"
+    },
+    "todo:7": {
+      "task_key": "todo:7",
+      "task_label": "7",
+      "task_title": "实现结果聚合、5% 阈值判定与控制台报告输出",
+      "session_id": "ses_204bf0856ffe4PSbZo4mzqoqJI",
+      "agent": "Sisyphus-Junior",
+      "category": "",
+      "updated_at": "2026-05-06T03:22:10.881Z"
+    },
+    "todo:8": {
+      "task_key": "todo:8",
+      "task_label": "8",
+      "task_title": "建立自动化测试与 IPv4/IPv6 端到端集成验证",
+      "session_id": "ses_204aa1c3affeTktynohJf3zqrZ",
+      "agent": "Sisyphus-Junior",
+      "category": "",
+      "updated_at": "2026-05-06T03:56:17.944Z"
+    },
+    "final-wave:f1": {
+      "task_key": "final-wave:f1",
+      "task_label": "F1",
+      "task_title": "Plan Compliance Audit — oracle",
+      "session_id": "ses_2048c2f41ffeeFErNTrMggH3nB",
+      "agent": "Sisyphus-Junior",
+      "category": "unspecified-high",
+      "updated_at": "2026-05-06T05:17:40.536Z"
+    }
+  }
+}

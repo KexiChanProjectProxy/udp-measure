@@ -1,0 +1,52 @@
+?   	github.com/udp-diagnostic/udpdiag/cmd/udpdiag	[no test files]
+testing: warning: no tests to run
+PASS
+ok  	github.com/udp-diagnostic/udpdiag/internal/config	(cached) [no tests to run]
+testing: warning: no tests to run
+PASS
+ok  	github.com/udp-diagnostic/udpdiag/internal/control	(cached) [no tests to run]
+testing: warning: no tests to run
+PASS
+ok  	github.com/udp-diagnostic/udpdiag/internal/protocol	(cached) [no tests to run]
+=== RUN   TestLossCalculation
+=== RUN   TestLossCalculation/0%_loss
+=== RUN   TestLossCalculation/50%_loss
+=== RUN   TestLossCalculation/100%_loss
+=== RUN   TestLossCalculation/5%_loss
+=== RUN   TestLossCalculation/exact_5%_threshold
+=== RUN   TestLossCalculation/just_below_5%_threshold
+=== RUN   TestLossCalculation/zero_sent
+=== RUN   TestLossCalculation/partial_33%_loss
+--- PASS: TestLossCalculation (0.00s)
+    --- PASS: TestLossCalculation/0%_loss (0.00s)
+    --- PASS: TestLossCalculation/50%_loss (0.00s)
+    --- PASS: TestLossCalculation/100%_loss (0.00s)
+    --- PASS: TestLossCalculation/5%_loss (0.00s)
+    --- PASS: TestLossCalculation/exact_5%_threshold (0.00s)
+    --- PASS: TestLossCalculation/just_below_5%_threshold (0.00s)
+    --- PASS: TestLossCalculation/zero_sent (0.00s)
+    --- PASS: TestLossCalculation/partial_33%_loss (0.00s)
+=== RUN   TestCriticalSizeFirstAtOrAboveThreshold
+=== RUN   TestCriticalSizeFirstAtOrAboveThreshold/first_size_at_threshold
+=== RUN   TestCriticalSizeFirstAtOrAboveThreshold/second_size_at_threshold
+=== RUN   TestCriticalSizeFirstAtOrAboveThreshold/no_size_reaches_threshold
+=== RUN   TestCriticalSizeFirstAtOrAboveThreshold/100%_loss_at_first_size
+=== RUN   TestCriticalSizeFirstAtOrAboveThreshold/threshold_reached_at_size_1472
+=== RUN   TestCriticalSizeFirstAtOrAboveThreshold/empty_results
+--- PASS: TestCriticalSizeFirstAtOrAboveThreshold (0.00s)
+    --- PASS: TestCriticalSizeFirstAtOrAboveThreshold/first_size_at_threshold (0.00s)
+    --- PASS: TestCriticalSizeFirstAtOrAboveThreshold/second_size_at_threshold (0.00s)
+    --- PASS: TestCriticalSizeFirstAtOrAboveThreshold/no_size_reaches_threshold (0.00s)
+    --- PASS: TestCriticalSizeFirstAtOrAboveThreshold/100%_loss_at_first_size (0.00s)
+    --- PASS: TestCriticalSizeFirstAtOrAboveThreshold/threshold_reached_at_size_1472 (0.00s)
+    --- PASS: TestCriticalSizeFirstAtOrAboveThreshold/empty_results (0.00s)
+=== RUN   TestReportFormatting
+--- PASS: TestReportFormatting (0.00s)
+=== RUN   TestCriticalSizeNoneWhenAllBelowThreshold
+--- PASS: TestCriticalSizeNoneWhenAllBelowThreshold (0.00s)
+PASS
+ok  	github.com/udp-diagnostic/udpdiag/internal/report	0.006s
+testing: warning: no tests to run
+PASS
+ok  	github.com/udp-diagnostic/udpdiag/internal/udp	(cached) [no tests to run]
+?   	github.com/udp-diagnostic/udpdiag/tests/integration	[no test files]

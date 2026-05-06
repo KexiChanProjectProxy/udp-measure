@@ -1,0 +1,33 @@
+Error: either --target4 or --target6 (or both) is required
+Usage: udpdiag client [flags]
+
+Run diagnostic client to measure UDP packet loss and identify
+Path MTU thresholds to a server.
+
+Packet size parameters refer to UDP payload bytes (excluding IP/UDP headers).
+
+Flags:
+  -control-port int
+    	TCP control port on server (default 18080)
+  -count int
+    	number of packets to send per test (default 100)
+  -direction string
+    	probe direction: up, down, or both (default "both")
+  -interval string
+    	interval between packets (duration string, e.g., 10ms, 1s) (default "10ms")
+  -max-estimated-duration string
+    	maximum estimated test duration before requiring explicit override (default "5m")
+  -max-size int
+    	maximum UDP payload size in bytes (default 1472)
+  -min-size int
+    	minimum UDP payload size in bytes (default 1200)
+  -ports string
+    	UDP port(s) to test: single, comma-separated, or range (e.g., 40000-40002)
+  -step int
+    	step size for payload size sweep in bytes (default 136)
+  -target4 string
+    	IPv4 target address (required)
+  -target6 string
+    	IPv6 target address
+exit status 1
+Exit code: 1

@@ -1,0 +1,19 @@
+=== Task 2 State Machine Invalid Transition Tests ===
+
+Command: go test ./... -run TestProtocolStateMachineRejectsInvalidTransition -v
+
+Results: PASS
+
+The test proves the state machine correctly forbids illegal transitions:
+- idle -> running: REJECTED (must go through preparing, ready first)
+- idle -> collecting: REJECTED (must go through preparing, ready, running first)
+- ready -> completed: REJECTED (must go through running, collecting first)
+- running -> idle: REJECTED (must go through collecting first)
+- collecting -> ready: REJECTED (terminal path only allows completed/failed)
+
+State machine transition rules enforced:
+idle -> preparing -> ready -> running -> collecting -> completed/failed
+     \            \        \           \
+      -> cancelled -> idle   -> cancelled  -> cancelled -> idle
+
+All invalid transitions are properly rejected with invalidTransition error.

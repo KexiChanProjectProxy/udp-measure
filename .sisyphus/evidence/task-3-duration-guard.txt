@@ -1,0 +1,24 @@
+?   	github.com/udp-diagnostic/udpdiag/cmd/udpdiag	[no test files]
+=== RUN   TestRejectOverlongSweep
+=== RUN   TestRejectOverlongSweep/short_sweep_passes
+=== RUN   TestRejectOverlongSweep/overlong_sweep_rejected
+=== RUN   TestRejectOverlongSweep/overlong_sweep_with_very_short_max_duration
+=== RUN   TestRejectOverlongSweep/large_sweep_with_generous_limit_passes
+--- PASS: TestRejectOverlongSweep (0.00s)
+    --- PASS: TestRejectOverlongSweep/short_sweep_passes (0.00s)
+    --- PASS: TestRejectOverlongSweep/overlong_sweep_rejected (0.00s)
+    --- PASS: TestRejectOverlongSweep/overlong_sweep_with_very_short_max_duration (0.00s)
+    --- PASS: TestRejectOverlongSweep/large_sweep_with_generous_limit_passes (0.00s)
+PASS
+ok  	github.com/udp-diagnostic/udpdiag/internal/config	0.007s
+testing: warning: no tests to run
+PASS
+ok  	github.com/udp-diagnostic/udpdiag/internal/control	0.005s [no tests to run]
+testing: warning: no tests to run
+PASS
+ok  	github.com/udp-diagnostic/udpdiag/internal/protocol	0.005s [no tests to run]
+?   	github.com/udp-diagnostic/udpdiag/internal/report	[no test files]
+testing: warning: no tests to run
+PASS
+ok  	github.com/udp-diagnostic/udpdiag/internal/udp	0.007s [no tests to run]
+?   	github.com/udp-diagnostic/udpdiag/tests/integration	[no test files]

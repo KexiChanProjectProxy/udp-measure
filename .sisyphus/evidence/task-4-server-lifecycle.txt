@@ -1,0 +1,6 @@
+=== RUN   TestServerSessionLifecycle
+--- PASS: TestServerSessionLifecycle (0.07s)
+=== RUN   TestServerCancelCleansResources
+--- PASS: TestServerCancelCleansResources (0.02s)
+PASS
+ok  	github.com/udp-diagnostic/udpdiag/internal/control	0.100s

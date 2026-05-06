@@ -1,0 +1,6 @@
+=== RUN   TestUDPReceiverIgnoresMismatchedSession
+--- PASS: TestUDPReceiverIgnoresMismatchedSession (0.30s)
+=== RUN   TestUDPSenderPayloadSizeCorrect
+--- PASS: TestUDPSenderPayloadSizeCorrect (0.13s)
+PASS
+ok  	github.com/udp-diagnostic/udpdiag/internal/udp	0.439s

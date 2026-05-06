@@ -1,0 +1,46 @@
+# Task 8 Failure Paths Evidence
+
+## Busy Server Rejection
+Second client attempting to connect while first client holds session:
+The server rejects the second client with BUSY and closes the connection.
+Error: "write tcp ...: write: connection reset by peer"
+Exit code: 1
+
+## Invalid Port Parsing Failure
+Command: udpdiag client --target4 127.0.0.1 --ports abc --direction up
+Error: invalid ports: invalid port "abc": strconv.Atoi: parsing "abc": invalid syntax
+Exit code: 1
+
+## Overlong Sweep Rejection
+Command: udpdiag client --target4 127.0.0.1 --control-port 18080 --direction both --ports 40000-40100 --min-size 100 --max-size 2000 --step 10 --count 1000 --interval 100ms
+Error: estimated sweep duration 1178h53m40s exceeds maximum allowed 5m0s (override with --max-estimated-duration)
+Exit code: 1
+
+## Additional Failure Scenarios Verified
+
+### Invalid Ports (config package)
+- "abc" -> Error: strconv.Atoi: parsing "abc": invalid syntax
+- "" -> Error: empty port specification
+- "70000" -> Error: port out of range
+- "0" -> Error: port must be between 1 and 65535
+
+### Direction Validation
+- Invalid direction string is rejected during parsing
+
+### Server Busy Detection (test output)
+When second client connects while first is active:
+- Connection is accepted but subsequent operations fail
+- Error: "connection reset by peer" (server closes connection on BUSY)
+
+## Test Coverage for Failure Paths
+- TestIntegrationBusyServer: PASS
+- TestIntegrationInvalidPorts: PASS (validates single, CSV, range, invalid)
+- TestIntegrationOverlongSweep: PASS
+- TestIntegrationCLIInvalidArgs: PASS (validates no args, invalid ports)
+
+## Summary
+All failure paths are properly handled:
+1. Busy server: Second client is rejected with error
+2. Invalid ports: Parse error with clear message
+3. Overlong sweep: Duration guard rejects with estimation
+4. Invalid arguments: CLI exits with non-zero and error message

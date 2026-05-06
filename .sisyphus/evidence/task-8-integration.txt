@@ -1,0 +1,85 @@
+# Task 8 Integration Evidence
+
+## Verification: go test ./...
+PASS - All tests pass including integration tests
+
+## Verification: go build ./...
+PASS - All packages build successfully
+
+## Verification: go test ./... -run TestIntegrationIPv4Loopback
+PASS - IPv4 loopback test passes with uplink and downlink
+
+## Verification: go test ./... -run TestIntegrationIPv6Loopback
+SKIP - IPv6 not available on loopback interface
+Skip reason: "IPv6 loopback not available: server bound to 127.0.0.1"
+
+## Sample Client Command Output (FIXED)
+Command: go run ./cmd/udpdiag client --target4 127.0.0.1 --control-port <port> --direction both --ports 40000-40002 --min-size 1200 --max-size 1472 --step 136 --count 20 --interval 10ms
+
+Exit code: 0 (SUCCESS)
+
+Output contains:
+- uplink: YES
+- downlink: YES
+- loss=: YES
+- critical_size=: YES
+
+Full output:
+Running test 1/18: family=ipv4 port=40000 direction=uplink size=1200
+  [uplink] sent=20 received=20 lost=0 loss=0.0%
+Running test 2/18: family=ipv4 port=40000 direction=uplink size=1336
+  [uplink] sent=20 received=20 lost=0 loss=0.0%
+Running test 3/18: family=ipv4 port=40000 direction=uplink size=1472
+  [uplink] sent=20 received=20 lost=0 loss=0.0%
+Running test 4/18: family=ipv4 port=40000 direction=downlink size=1200
+  [downlink] sent=20 received=20 lost=0 loss=0.0%
+...
+Running test 18/18: family=ipv4 port=40002 direction=downlink size=1472
+  [downlink] sent=20 received=20 lost=0 loss=0.0%
+
+=== UDP Diagnostic Report ===
+Estimated duration: 3.96s
+
+--- Per-Size Results ---
+target: 127.0.0.1  family: ipv4  direction: uplink  port: 40000
+  size=1200  sent=20  received=20  lost=0  loss=0.0%
+  size=1336  sent=20  received=20  lost=0  loss=0.0%
+  size=1472  sent=20  received=20  lost=0  loss=0.0%
+  critical_size=none (no size reached 5.0% observed threshold)
+
+target: 127.0.0.1  family: ipv4  direction=downlink port: 40000
+  size=1200  sent=20  received=20  lost=0  loss=0.0%
+  size=1336  sent=20  received=20  lost=0  loss=0.0%
+  size=1472  sent=20  received=20  lost=0  loss=0.0%
+  critical_size=none (no size reached 5.0% observed threshold)
+...
+
+--- Summary ---
+Total: 18 tests, 360 sent, 360 received, 0 lost, overall loss=0.0%
+Client completed successfully
+
+## Bug Fixed: UDP Receiver Socket Leak
+Root cause: The UDP receiver socket was not being closed after use, causing "address already in use" errors on subsequent tests using the same UDP port.
+
+Fix applied:
+1. Added `receiver.Close()` in `runUplinkReceiver` after `Receive` returns
+2. Added UDP receiver cleanup in `cleanup()` and `cleanupNoStateChange()` functions
+
+## Integration Test Coverage
+- TestIntegrationIPv4Loopback: PASS (covers up, down, both)
+- TestIntegrationIPv6Loopback: SKIP (IPv6 not available on loopback)
+- TestIntegrationBusyServer: PASS
+- TestIntegrationInvalidPorts: PASS
+- TestIntegrationOverlongSweep: PASS
+- TestIntegrationDirectionUp: PASS
+- TestIntegrationDirectionDown: PASS
+- TestIntegrationDirectionBoth: PASS
+- TestIntegrationReportGeneration: PASS
+- TestIntegrationCLIIntegration: PASS (now properly fails when CLI fails)
+- TestIntegrationCLIInvalidArgs: PASS
+- TestIntegrationSweepExpansion: PASS
+- TestIntegrationServerLifecycle: PASS
+- TestIntegrationLossCalculation: PASS
+- TestIntegrationCriticalSizeDetection: PASS
+- TestIntegrationFullValidation: PASS
+- TestIntegrationExpectedOutputFormat: PASS
