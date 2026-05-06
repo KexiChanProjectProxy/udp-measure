@@ -40,18 +40,6 @@ jobs:
             arch: arm64
             artifact_name: udpdiag-linux-arm64
             ext: ''
-          - os: darwin
-            arch: amd64
-            artifact_name: udpdiag-darwin-amd64
-            ext: ''
-          - os: darwin
-            arch: arm64
-            artifact_name: udpdiag-darwin-arm64
-            ext: ''
-          - os: windows
-            arch: amd64
-            artifact_name: udpdiag-windows-amd64
-            ext: .exe
 
     steps:
       - name: Checkout code
@@ -66,6 +54,7 @@ jobs:
         env:
           GOOS: ${{ matrix.os }}
           GOARCH: ${{ matrix.arch }}
+          CGO_ENABLED: 0
         run: |
           output="udpdiag${{ matrix.ext }}"
           go build -ldflags="-s -w" -o "$output" ./cmd/udpdiag
