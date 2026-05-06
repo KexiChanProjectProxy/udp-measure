@@ -215,17 +215,23 @@ func (s *Session) handlePrepare(conn net.Conn, msg protocol.Prepare) error {
 	s.intervalMs = msg.IntervalMs
 	s.clientReceivePort = msg.ClientReceivePort
 
+	// Get client IP from TCP connection for downlink target
+	clientIP := ""
+	if tcpAddr, ok := conn.RemoteAddr().(*net.TCPAddr); ok {
+		clientIP = tcpAddr.IP.String()
+	}
+
 	if msg.Direction == protocol.DirectionDownlink && msg.ClientReceivePort != 0 {
 		if msg.Family == protocol.FamilyIPv6 {
-			s.targetAddress = fmt.Sprintf("[::1]:%d", msg.ClientReceivePort)
+			s.targetAddress = fmt.Sprintf("[%s]:%d", clientIP, msg.ClientReceivePort)
 		} else {
-			s.targetAddress = fmt.Sprintf("127.0.0.1:%d", msg.ClientReceivePort)
+			s.targetAddress = fmt.Sprintf("%s:%d", clientIP, msg.ClientReceivePort)
 		}
 	} else {
 		if msg.Family == protocol.FamilyIPv6 {
-			s.targetAddress = fmt.Sprintf("[::1]:%d", msg.UDPPort)
+			s.targetAddress = fmt.Sprintf("[%s]:%d", clientIP, msg.UDPPort)
 		} else {
-			s.targetAddress = fmt.Sprintf("127.0.0.1:%d", msg.UDPPort)
+			s.targetAddress = fmt.Sprintf("%s:%d", clientIP, msg.UDPPort)
 		}
 	}
 
@@ -317,11 +323,9 @@ func (s *Session) runUplinkReceiver(conn net.Conn) {
 	quitCh := s.quitCh
 	s.receiverDone = make(chan struct{})
 	receiverDone := s.receiverDone
-	bindAddr := fmt.Sprintf(":%d", s.udpPort)
+	bindAddr := fmt.Sprintf("0.0.0.0:%d", s.udpPort)
 	if s.family == protocol.FamilyIPv6 {
-		bindAddr = fmt.Sprintf("[::1]:%d", s.udpPort)
-	} else {
-		bindAddr = fmt.Sprintf("127.0.0.1:%d", s.udpPort)
+		bindAddr = fmt.Sprintf("[::]:%d", s.udpPort)
 	}
 	receiver, err := udp.NewReceiver(udp.ReceiverConfig{
 		SessionID:     0,

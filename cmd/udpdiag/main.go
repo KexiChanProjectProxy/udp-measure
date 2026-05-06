@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"net"
 	"os"
 	"time"
 
@@ -196,8 +197,12 @@ func clientMain(args []string) {
 		os.Exit(1)
 	}
 
-	// Build server address
-	serverAddr := fmt.Sprintf("%s:%d", cfg.Target4, cfg.ControlPort)
+	// Use IPv6 if IPv4 is empty, otherwise use IPv4
+	controlTarget := cfg.Target4
+	if controlTarget == "" {
+		controlTarget = cfg.Target6
+	}
+	serverAddr := net.JoinHostPort(controlTarget, fmt.Sprintf("%d", cfg.ControlPort))
 
 	// Estimate duration for report
 	estimatedDuration := cfg.EstimateDuration(plans).String()
