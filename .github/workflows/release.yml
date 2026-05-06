@@ -56,14 +56,14 @@ jobs:
           GOARCH: ${{ matrix.arch }}
           CGO_ENABLED: 0
         run: |
-          output="udpdiag${{ matrix.ext }}"
+          output="udpdiag-${{ matrix.os }}-${{ matrix.arch }}"
           go build -ldflags="-s -w" -o "$output" ./cmd/udpdiag
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact_name }}
-          path: udpdiag${{ matrix.ext }}
+          path: udpdiag-${{ matrix.os }}-${{ matrix.arch }}
           retention-days: 1
 
   release:
